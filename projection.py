@@ -79,6 +79,6 @@ make_exponential_plot(omicron_hospital.VENT, "Number of covid-19 patients on ven
 make_exponential_plot(omicron_deaths.DEATHS, "Number of covid-19 related deaths", ax=axes[4], log_plot=False)
 axes[4].set_ylim(0,1000)
 fig.tight_layout()
-date_of_prediction = omicron_cases.index.max().date
+date_of_prediction = omicron_cases.index.max().date()
 filename = f"/var/www/htdocs/nsw-pandemic-predictions/{date_of_prediction}.png"
 fig.savefig(filename)
