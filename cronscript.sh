@@ -1,8 +1,10 @@
 #!/bin/sh
 
 cd $(dirname $0)
-git pull
+git pull -q
 mkdir -p output
 ./projection.py $*
 git add output/*.png
-git commit -m"Output as of $(date +%Y-%B-%d)"
+TODAY=$(date +%Y-%B-%d)
+git commit -m"Output as of $TODAY"
+git push
