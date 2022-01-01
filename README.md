@@ -14,4 +14,5 @@ fancier automated data journalism; but if I do I probably need to be
 nice to Anthony Macali (who lives in Victoria, poor guy) on whose
 data scraping this whole system works.
 
-
+Have a look at the (output/)[output/] folder for today's latest.
+It gets updated around 10:30am each day.
