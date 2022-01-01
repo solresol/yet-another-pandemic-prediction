@@ -5,6 +5,12 @@ import matplotlib.pyplot
 import sklearn.linear_model
 import math
 import numpy
+import argparse
+import os
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--copy-to", help="Output the image into another directory as well")
+args = parser.parse_args()
 
 daily_cases = pandas.read_html('https://covidlive.com.au/report/daily-cases/nsw')[1]
 daily_tests = pandas.read_html('https://covidlive.com.au/report/daily-tests/nsw')[1]
@@ -80,5 +86,9 @@ make_exponential_plot(omicron_deaths.DEATHS, "Number of covid-19 related deaths"
 axes[4].set_ylim(0,1000)
 fig.tight_layout()
 date_of_prediction = omicron_cases.index.max().date()
-filename = f"/var/www/htdocs/nsw-pandemic-predictions/{date_of_prediction}.png"
+if args.copy_to is not None:
+   filename = os.path.join(args.copy_to, f"{date_of_prediction}.png")
+   fig.savefig(filename)
+
+filename = os.path.join('output', f"{date_of_prediction}.png")
 fig.savefig(filename)
