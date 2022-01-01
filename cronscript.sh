@@ -6,5 +6,5 @@ mkdir -p output
 ./projection.py $*
 git add output/*.png
 TODAY=$(date +%Y-%B-%d)
-git commit -m"Output as of $TODAY"
-git push
+git commit -q -m"Output as of $TODAY"
+git push -q
