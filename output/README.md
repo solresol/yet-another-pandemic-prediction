@@ -1,6 +1,6 @@
-# NSW Covid Update for 2022-01-02
+# NSW Covid Update for 2022-01-03
 
-![](2022-01-02.png)
+![](2022-01-03.png)
 
 
 ## What could be wrong with this model?
