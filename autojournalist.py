@@ -19,7 +19,7 @@ This report is available in several formats:
 
 - [NSW Covid Report {today} Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/{today}/nsw-covid-report-{today}.docx)
 
-- [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md)
+- [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
 
 ## Hospitalisation
