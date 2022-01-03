@@ -2,9 +2,9 @@
 
 This report is available in several formats:
 
-- [NSW Covid Report 2022-01-03 Word Format.docx](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/2022-01-03/nsw-covid-report-2022-01-03.docx)
+- [NSW Covid Report 2022-01-03 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-03/nsw-covid-report-2022-01-03.pdf)
 
-- [NSW Covid Report 2022-01-03 PDF Format.docx](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/2022-01-03/nsw-covid-report-2022-01-03.pdf)
+- [NSW Covid Report 2022-01-03 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-03/nsw-covid-report-2022-01-03.docx)
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md)
 
