@@ -7,63 +7,54 @@ import math
 import numpy
 import argparse
 import os
+import fetchdata
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--copy-to", help="Output the image into another directory as well")
 args = parser.parse_args()
 
-daily_cases = pandas.read_html('https://covidlive.com.au/report/daily-cases/nsw')[1]
-daily_tests = pandas.read_html('https://covidlive.com.au/report/daily-tests/nsw')[1]
-daily_hospital = pandas.read_html('https://covidlive.com.au/report/daily-hospitalised/nsw')[1]
-daily_deaths = pandas.read_html('https://covidlive.com.au/report/daily-deaths/nsw')[1]
+omicron_cases, omicron_tests, omicron_hospital, omicron_deaths = fetchdata.fetch()
 
-daily_cases['DATE'] = pandas.to_datetime(daily_cases.DATE)
-daily_tests['DATE'] = pandas.to_datetime(daily_tests.DATE)
-daily_hospital['DATE'] = pandas.to_datetime(daily_hospital.DATE)
-daily_deaths['DATE'] = pandas.to_datetime(daily_deaths.DATE)
+time_data = pandas.DataFrame({'when': omicron_cases.index})
+time_data['when_tstamp'] = time_data.when.view('int64') / 1e9 / 86400
 
-daily_tests['TESTS_PERFORMED'] = daily_tests.TESTS.diff(periods=-1)
-
-daily_cases.set_index('DATE', inplace=True)
-daily_tests.set_index('DATE', inplace=True)
-daily_hospital.set_index('DATE', inplace=True)
-daily_deaths.set_index('DATE', inplace=True)
-
-daily_cases.sort_index(inplace=True)
-daily_tests.sort_index(inplace=True)
-daily_hospital.sort_index(inplace=True)
-daily_deaths.sort_index(inplace=True)
-
-omicron_cases = daily_cases[daily_cases.index > '2021-12-01']
-omicron_tests = daily_tests[daily_tests.index > '2021-12-01']
-omicron_hospital = daily_hospital[daily_hospital.index > '2021-12-01']
-omicron_deaths = daily_deaths[daily_deaths.index > '2021-12-01']
-
-def make_exponential_plot(dataset, title, ax, log_plot=True):
-    dataset.plot(logy=log_plot, ax=ax, label=f"Actual (most recent data from {dataset.index.date.max()})")
+def make_model(dataset):
+    time_data = pandas.DataFrame({'when': dataset.index})
+    time_data['when_tstamp'] = time_data.when.view('int64') / 1e9 / 86400    
     log_dataset = dataset.map(math.log10)
     model = sklearn.linear_model.TheilSenRegressor()
     model.fit(time_data[['when_tstamp']], log_dataset)
+    return model
+
+def denoise_and_extrapolate(dataset, model, number_of_days=90):
+    time_data = pandas.DataFrame({'when': dataset.index})
+    time_data['when_tstamp'] = time_data.when.view('int64') / 1e9 / 86400        
+    future = pandas.DataFrame({'when':
+                           [time_data.when.max() + pandas.to_timedelta(f'{n}d') for n in range(1,number_of_days)]})
+    future['when_tstamp'] = future.when.view('int64') / 1e9/ 86400
     model_test = pandas.Series(data=model.predict(time_data[['when_tstamp']]), 
                                 index=time_data.when).map(lambda x: 10**x)
     model_extrapolate = pandas.Series(data=model.predict(future[['when_tstamp']]), 
                                    index=future.when).map(lambda x: 10**x)
+    return model_test, model_extrapolate
+
+def doubling_period_of_model(model):
+    return math.log10(2) / model.coef_[0]
+
+def make_exponential_plot(dataset, title, ax, log_plot=True):
+    dataset.plot(logy=log_plot, ax=ax, label=f"Actual (most recent data from {dataset.index.date.max()})")
+    model = make_model(dataset)
+    model_test, model_extrapolate = denoise_and_extrapolate(dataset, model)
     model_test.plot(logy=log_plot, ax=ax, color="cyan", linestyle="--", label="Model")
     model_extrapolate.plot(logy=log_plot, ax=ax, color="green", linestyle=":", label="Predicted")
-    doubling_period = math.log10(2) / model.coef_[0]
+    doubling_period = doubling_period_of_model(model)
     second_line_of_text = f"Doubles every {doubling_period:.1f} days"
     ax.set_title(title + "\n" + second_line_of_text)
     ax.legend(loc='lower right')
 
-time_data = pandas.DataFrame({'when': omicron_cases.index})
-future = pandas.DataFrame({'when':
-                           [time_data.when.max() + pandas.to_timedelta(f'{n}d') for n in range(1,90)]})
-time_data['when_tstamp'] = time_data.when.view('int64') / 1e9 / 86400
-future['when_tstamp'] = future.when.view('int64') / 1e9/ 86400
 
 
 fig, axes = matplotlib.pyplot.subplots(nrows=5, figsize=(12,20))
-#make_exponential_plot(omicron_cases.NEW, "Number of PCR tests returning positive", axes[0])
 make_exponential_plot(omicron_cases.CASES/1e6, "Number of people who have been infected in NSW (millions)",
                       axes[0], log_plot=False)
 axes[0].axhline(8.16, color="red")
