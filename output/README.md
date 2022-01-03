@@ -1,33 +1,33 @@
-# NSW Covid Update for 2022-01-03
+# NSW Covid Update for 2022-01-04
 
 This report is available in several formats:
 
-- [NSW Covid Report 2022-01-03 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-03/nsw-covid-report-2022-01-03.pdf)
+- [NSW Covid Report 2022-01-04 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-04/nsw-covid-report-2022-01-04.pdf)
 
-- [NSW Covid Report 2022-01-03 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-03/nsw-covid-report-2022-01-03.docx)
+- [NSW Covid Report 2022-01-04 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-04/nsw-covid-report-2022-01-04.docx)
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
 
 ## Hospitalisation
 
-![](2022-01-03/hospitalisation.png)
+![](2022-01-04/hospitalisation.png)
 
 ## ICU
 
-![](2022-01-03/icu.png)
+![](2022-01-04/icu.png)
 
 ## Number of people on ventilators
 
-![](2022-01-03/ventilators.png)
+![](2022-01-04/ventilators.png)
 
 ## Number of confirmed infections
 
-![](2022-01-03/infection.png)
+![](2022-01-04/infection.png)
 
 ## Deaths
 
-![](2022-01-03/deaths.png)
+![](2022-01-04/deaths.png)
 
 
 # What could be wrong with this model?
@@ -49,21 +49,21 @@ has been getting worse, and I have been too optimistic.
 
 ## Hospitalisation
 
-![](2022-01-03/historical/hospitalisation.png)
+![](2022-01-04/historical/hospitalisation.png)
 
 ## ICU
 
-![](2022-01-03/historical/icu.png)
+![](2022-01-04/historical/icu.png)
 
 ## Number of people on ventilators
 
-![](2022-01-03/historical/ventilators.png)
+![](2022-01-04/historical/ventilators.png)
 
 ## Number of confirmed infections
 
-![](2022-01-03/historical/infection.png)
+![](2022-01-04/historical/infection.png)
 
 ## Deaths
 
-![](2022-01-03/historical/deaths.png)
+![](2022-01-04/historical/deaths.png)
 
