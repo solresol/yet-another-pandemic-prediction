@@ -1,6 +1,8 @@
 import pandas
+import glob
+import os
 
-def fetch():
+def fetch_covidlive():
     daily_cases = pandas.read_html('https://covidlive.com.au/report/daily-cases/nsw')[1]
     daily_tests = pandas.read_html('https://covidlive.com.au/report/daily-tests/nsw')[1]
     daily_hospital = pandas.read_html('https://covidlive.com.au/report/daily-hospitalised/nsw')[1]
@@ -29,3 +31,32 @@ def fetch():
     omicron_deaths = daily_deaths[daily_deaths.index > '2021-12-01']
 
     return (omicron_cases, omicron_tests, omicron_hospital, omicron_deaths)
+
+
+class History:
+    def __init__(self):
+        self.__data = {}
+        for filename in glob.glob('historical/*.csv'):
+            basename = os.path.basename(filename)
+            data_name, csv = os.path.splitext(basename)
+            self.__data[data_name] = pandas.read_csv(filename)
+            self.__data[data_name]['Date'] = pandas.to_datetime(self.__data[data_name]['Date'])
+            self.__data[data_name].set_index('Date', inplace=True)
+            
+    def __getattr__(self, data_name):
+        return self.__data[data_name].copy()
+
+    def add_doubling_rate_to_history(self, data_name, date, doubling_rate):
+        csv = self.__data[data_name]
+        # Give me your worst date format, and I'll handle it
+        date = pandas.to_datetime(date)
+        if date in set(csv.index):
+            csv.loc[date, 'Doubling Rate'] = doubling_rate
+        else:
+            new_csv = pandas.DataFrame({'Doubling Rate':
+                                        pandas.Series(data=[doubling_rate], index=[date])})
+            self.__data[data_name] = pandas.concat([csv, new_csv])
+            csv = self.__data[data_name]
+            csv.sort_index(inplace=True)
+            csv.index.rename('Date', inplace=True)
+        csv.to_csv(f"historical/{data_name}.csv")
