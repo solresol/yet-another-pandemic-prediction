@@ -7,13 +7,13 @@ import math
 import numpy
 import argparse
 import os
-import fetchdata
+import datamgmt
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--copy-to", help="Output the image into another directory as well")
 args = parser.parse_args()
 
-omicron_cases, omicron_tests, omicron_hospital, omicron_deaths = fetchdata.fetch_covidlive()
+omicron_cases, omicron_tests, omicron_hospital, omicron_deaths = datamgmt.fetch_covidlive()
 
 time_data = pandas.DataFrame({'when': omicron_cases.index})
 time_data['when_tstamp'] = time_data.when.view('int64') / 1e9 / 86400
