@@ -7,6 +7,7 @@ import datamgmt
 import matplotlib.pyplot
 import os
 import numpy
+import pandas
 
 h = datamgmt.History()
 
@@ -18,6 +19,22 @@ def get_latest(dataname, column):
     return latest[column]
   else:
     return None
+
+def format_date_nicely(d):
+  d = pandas.to_datetime(d)
+  day = d.strftime("%d")
+  if day[-1] == "1":
+    day += "st"
+  elif day[-1] == "2":
+    day += "nd"
+  elif day[-1] == "3":
+    day += "rd"
+  else:
+    day += "th"
+  weekday = d.strftime("%A")
+  month = d.strftime("%B")
+  year = d.strftime("%Y")
+  return f"{weekday} {day} {month} {year}"
 
 infection_saturation = get_latest('infection', 'Saturation Date')  
 hospital_saturation = get_latest('hospitalisation', 'Saturation Date')
@@ -39,13 +56,13 @@ This report is available in several formats:
 
 ## Hospitalisation
 
-{'Hospitals will not be saturated in the foreseeable future.' if hospital_saturation is None else 'Hospitals will be saturated on *' + hospital_saturation + '*.'}
+{'Hospitals will not be saturated in the foreseeable future.' if hospital_saturation is None else 'Hospitals will be saturated on **' + format_date_nicely(hospital_saturation) + '**.'}
 
 ![]({today}/hospitalisation.png)
 
 ## ICU
 
-{'ICU beds will continue to be available for the foreseeable future.' if icu_saturation is None else 'Every ICU bed will be occupied on on *' + icu_saturation + '*.'}
+{'ICU beds will continue to be available for the foreseeable future.' if icu_saturation is None else 'Every ICU bed will be occupied on on **' + format_date_nicely(icu_saturation) + '**.'}
 
 
 ![]({today}/icu.png)
@@ -56,7 +73,7 @@ This report is available in several formats:
 
 ## Number of confirmed infections
 
-{'It is not possible to predict accurately when the current outbreak will peak. It is too far in the future.' if infection_saturation is None else 'The current outbreak of Covid will peak on *' + infection_saturation + '*.'}
+{'It is not possible to predict accurately when the current outbreak will peak. It is too far in the future.' if infection_saturation is None else 'The current outbreak of Covid will peak on **' + format_date_nicely(infection_saturation) + '**.'}
 
 ![]({today}/infection.png)
 
