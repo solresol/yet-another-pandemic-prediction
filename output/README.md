@@ -11,9 +11,14 @@ This report is available in several formats:
 
 ## Hospitalisation
 
+Hospitals will be saturated on *2022-02-17*.
+
 ![](2022-01-04/hospitalisation.png)
 
 ## ICU
+
+Every ICU bed will be occupied on on *2022-02-14*.
+
 
 ![](2022-01-04/icu.png)
 
@@ -22,6 +27,8 @@ This report is available in several formats:
 ![](2022-01-04/ventilators.png)
 
 ## Number of confirmed infections
+
+It is not possible to predict accurately when the current outbreak will peak. It is too far in the future.
 
 ![](2022-01-04/infection.png)
 
