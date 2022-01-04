@@ -6,8 +6,23 @@ import time
 import datamgmt
 import matplotlib.pyplot
 import os
+import numpy
 
 h = datamgmt.History()
+
+def get_latest(dataname, column):
+  global h
+  source = getattr(h, dataname)
+  if column in source.columns:
+    latest = source.loc[source.index.max()]
+    return latest[column]
+  else:
+    return None
+
+infection_saturation = get_latest('infection', 'Saturation Date')  
+hospital_saturation = get_latest('hospitalisation', 'Saturation Date')
+icu_saturation = get_latest('icu', 'Saturation Date')
+
 today = time.strftime("%Y-%m-%d")
 
 with open('output/README.md', 'w') as markdown:
@@ -24,9 +39,14 @@ This report is available in several formats:
 
 ## Hospitalisation
 
+{'Hospitals will not be saturated in the foreseeable future.' if hospital_saturation is None else 'Hospitals will be saturated on *' + hospital_saturation + '*.'}
+
 ![]({today}/hospitalisation.png)
 
 ## ICU
+
+{'ICU beds will continue to be available for the foreseeable future.' if icu_saturation is None else 'Every ICU bed will be occupied on on *' + icu_saturation + '*.'}
+
 
 ![]({today}/icu.png)
 
@@ -35,6 +55,8 @@ This report is available in several formats:
 ![]({today}/ventilators.png)
 
 ## Number of confirmed infections
+
+{'It is not possible to predict accurately when the current outbreak will peak. It is too far in the future.' if infection_saturation is None else 'The current outbreak of Covid will peak on *' + infection_saturation + '*.'}
 
 ![]({today}/infection.png)
 

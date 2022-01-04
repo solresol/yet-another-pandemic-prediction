@@ -60,3 +60,21 @@ class History:
             csv.sort_index(inplace=True)
             csv.index.rename('Date', inplace=True)
         csv.to_csv(f"historical/{data_name}.csv")
+
+    def add_saturation_date_to_history(self, data_name, date, saturation_date):
+        csv = self.__data[data_name]
+        # Give me your worst date format, and I'll handle it
+        date = pandas.to_datetime(date)
+        saturation_date = pandas.to_datetime(saturation_date).strftime('%Y-%m-%d')
+        if 'Saturation Date' not in csv.columns:
+            csv['Saturation Date'] = None
+        if date in set(csv.index):
+            csv.loc[date, 'Saturation Date'] = saturation_date
+        else:
+            new_csv = pandas.DataFrame({'Saturation Date':
+                                        pandas.Series(data=[saturation_date], index=[date])})
+            self.__data[data_name] = pandas.concat([csv, new_csv])
+            csv = self.__data[data_name]
+            csv.sort_index(inplace=True)
+            csv.index.rename('Date', inplace=True)
+        csv.to_csv(f"historical/{data_name}.csv")            

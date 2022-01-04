@@ -26,12 +26,17 @@ def make_model(dataset):
     model.fit(time_data[['when_tstamp']], log_dataset)
     return model
 
+def make_future_dates(starting_date='today', number_of_days=90):
+    starting_date = pandas.to_datetime(starting_date)
+    future = pandas.DataFrame({'when':
+                           [starting_date + pandas.to_timedelta(f'{n}d') for n in range(1,number_of_days)]})
+    future['when_tstamp'] = future.when.view('int64') / 1e9/ 86400
+    return future
+
 def denoise_and_extrapolate(dataset, model, number_of_days=90):
     time_data = pandas.DataFrame({'when': dataset.index})
     time_data['when_tstamp'] = time_data.when.view('int64') / 1e9 / 86400
-    future = pandas.DataFrame({'when':
-                           [time_data.when.max() + pandas.to_timedelta(f'{n}d') for n in range(1,number_of_days)]})
-    future['when_tstamp'] = future.when.view('int64') / 1e9/ 86400
+    future = make_future_dates(time_data.when.max(), number_of_days)
     model_test = pandas.Series(data=model.predict(time_data[['when_tstamp']]),
                                 index=time_data.when).map(lambda x: 10**x)
     model_extrapolate = pandas.Series(data=model.predict(future[['when_tstamp']]),
@@ -40,6 +45,16 @@ def denoise_and_extrapolate(dataset, model, number_of_days=90):
 
 def doubling_period_of_model(model):
     return math.log10(2) / model.coef_[0]
+
+def find_saturation_date(model, saturation_value, starting_date='today'):
+    future = make_future_dates(starting_date)
+    model_extrapolate = pandas.Series(data=model.predict(future[['when_tstamp']]),
+                                      index=future.when).map(lambda x: 10**x)
+    model_extrapolate = model_extrapolate[model_extrapolate > saturation_value]
+    if model_extrapolate.shape[0] == 0:
+        return None
+    return pandas.to_datetime(model_extrapolate.idxmin().strftime('%Y-%m-%d'))
+    
 
 def make_exponential_plot(dataset, title, ax, log_plot=True):
     dataset.plot(logy=log_plot, ax=ax, label=f"Actual (most recent data from {dataset.index.date.max()})")
@@ -62,6 +77,10 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     ax.axhline(8.16, color="red")
     ax.annotate(xy=(time_data.when.min(), 7.8), s="Population of NSW", color='red')
     model = make_model(dataset)
+    saturation = find_saturation_date(model, 7.8 / 3)
+    # I am assuming that we can safely model an exponential until we are at a third of the saturation. After that the infection rates will drop quite quickly.
+    if saturation is not None:
+        h.add_saturation_date_to_history('infection', today, saturation)
     h.add_doubling_rate_to_history('infection', today, doubling_period_of_model(model))
     fig.savefig(f"output/{today}/infection.png")
 
@@ -72,6 +91,9 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     ax.axhline(20000, color="red")
     ax.annotate(xy=(time_data.when.min(), 22000), s="Number of hospital beds in NSW", color='red')
     model = make_model(dataset)
+    saturation = find_saturation_date(model, 22000)
+    if saturation is not None:
+        h.add_saturation_date_to_history('hospitalisation', today, saturation)    
     h.add_doubling_rate_to_history('hospitalisation', today, doubling_period_of_model(model))
     fig.savefig(f"output/{today}/hospitalisation.png")
 
@@ -84,6 +106,10 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     ax.annotate(xy=(time_data.when.min(),550), s="Basic ICU capacity", color='red')
     ax.annotate(xy=(time_data.when.min(),2050), s="Maximum ICU capacity (surge)", color='red')
     model = make_model(dataset)
+    saturation = find_saturation_date(model, 550)
+    if saturation is not None:
+        h.add_saturation_date_to_history('icu', today, saturation)    
+    
     h.add_doubling_rate_to_history('icu', today, doubling_period_of_model(model))
     fig.savefig(f"output/{today}/icu.png")
 
