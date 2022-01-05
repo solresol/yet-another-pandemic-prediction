@@ -33,12 +33,16 @@ def make_future_dates(starting_date='today', number_of_days=90):
     future['when_tstamp'] = future.when.view('int64') / 1e9/ 86400
     return future
 
-def denoise_and_extrapolate(dataset, model, number_of_days=90):
+def denoise_and_extrapolate(dataset, model, number_of_days=90, saturation_value=None):
     time_data = pandas.DataFrame({'when': dataset.index})
     time_data['when_tstamp'] = time_data.when.view('int64') / 1e9 / 86400
-    future = make_future_dates(time_data.when.max(), number_of_days)
     model_test = pandas.Series(data=model.predict(time_data[['when_tstamp']]),
-                                index=time_data.when).map(lambda x: 10**x)
+                                   index=time_data.when).map(lambda x: 10**x)
+    if saturation_value is None:
+        future = make_future_dates(time_data.when.max(), number_of_days)
+    else:
+        future = make_future_dates_until_saturation(model, saturation_value)
+
     model_extrapolate = pandas.Series(data=model.predict(future[['when_tstamp']]),
                                    index=future.when).map(lambda x: 10**x)
     return model_test, model_extrapolate
@@ -54,14 +58,22 @@ def find_saturation_date(model, saturation_value, starting_date='today'):
     if model_extrapolate.shape[0] == 0:
         return None
     return pandas.to_datetime(model_extrapolate.idxmin().strftime('%Y-%m-%d'))
-    
 
-def make_exponential_plot(dataset, title, ax, log_plot=True):
-    dataset.plot(logy=log_plot, ax=ax, label=f"Actual (most recent data from {dataset.index.date.max()})")
+def make_future_dates_until_saturation(model, saturation_value):
+    answer = make_future_dates()
+    saturation_date = find_saturation_date(model, saturation_value)
+    if saturation_date is None:
+        return answer
+    saturation_date = pandas.to_datetime(saturation_date) + pandas.to_timedelta("7d")
+    answer = answer[answer.when <= saturation_date]
+    return answer
+
+def make_exponential_plot(dataset, title, ax, log_plot=True, saturation_value=None):
     model = make_model(dataset)
-    model_test, model_extrapolate = denoise_and_extrapolate(dataset, model)
-    model_test.plot(logy=log_plot, ax=ax, color="cyan", linestyle="--", label="Model")
+    model_test, model_extrapolate = denoise_and_extrapolate(dataset, model, saturation_value=saturation_value)
     model_extrapolate.plot(logy=log_plot, ax=ax, color="green", linestyle=":", label="Predicted")
+    model_test.plot(logy=log_plot, ax=ax, color="cyan", linestyle="--", label="Model")
+    dataset.plot(logy=log_plot, ax=ax, label=f"Actual (most recent data from {dataset.index.date.max()})")
     doubling_period = doubling_period_of_model(model)
     second_line_of_text = f"Doubles every {doubling_period:.1f} days"
     ax.set_title(title + "\n" + second_line_of_text)
@@ -73,7 +85,7 @@ h = datamgmt.History()
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
     dataset = omicron_cases.CASES/1e6
-    make_exponential_plot(dataset, "Number of people who have been infected in NSW (millions)", ax, log_plot=False)
+    make_exponential_plot(dataset, "Number of people who have been infected in NSW (millions)", ax, log_plot=False, saturation_value=7.8)
     ax.axhline(8.16, color="red")
     ax.annotate(xy=(time_data.when.min(), 7.8), s="Population of NSW", color='red')
     model = make_model(dataset)
@@ -87,11 +99,11 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
     dataset = omicron_hospital.HOSP
-    make_exponential_plot(dataset, "Number of covid-19 patients in hospital", ax=ax, log_plot=False)
+    make_exponential_plot(dataset, "Number of covid-19 patients in hospital", ax=ax, log_plot=False, saturation_value=20000)
     ax.axhline(20000, color="red")
     ax.annotate(xy=(time_data.when.min(), 22000), s="Number of hospital beds in NSW", color='red')
     model = make_model(dataset)
-    saturation = find_saturation_date(model, 22000)
+    saturation = find_saturation_date(model, 20000)
     if saturation is not None:
         h.add_saturation_date_to_history('hospitalisation', today, saturation)    
     h.add_doubling_rate_to_history('hospitalisation', today, doubling_period_of_model(model))
@@ -100,7 +112,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
     dataset = omicron_hospital.ICU
-    make_exponential_plot(dataset, "Number of covid-19 patients in ICU",  ax=ax, log_plot=False)
+    make_exponential_plot(dataset, "Number of covid-19 patients in ICU",  ax=ax, log_plot=False, saturation_value=2000)
     ax.axhline(500, color='red')
     ax.axhline(2000, color='red')
     ax.annotate(xy=(time_data.when.min(),550), s="Basic ICU capacity", color='red')
