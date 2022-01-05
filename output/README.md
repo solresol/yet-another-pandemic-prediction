@@ -1,40 +1,40 @@
-# NSW Covid Update for 2022-01-05
+# NSW Covid Update for 2022-01-06
 
 This report is available in several formats:
 
-- [NSW Covid Report 2022-01-05 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-05/nsw-covid-report-2022-01-05.pdf)
+- [NSW Covid Report 2022-01-06 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-06/nsw-covid-report-2022-01-06.pdf)
 
-- [NSW Covid Report 2022-01-05 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-05/nsw-covid-report-2022-01-05.docx)
+- [NSW Covid Report 2022-01-06 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-06/nsw-covid-report-2022-01-06.docx)
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
 
 ## Hospitalisation
 
-Hospitals will be saturated on **Wednesday 16th February 2022**.
+Hospitals will be saturated on **Wednesday 09th February 2022**.
 
-![](2022-01-05/hospitalisation.png)
+![](2022-01-06/hospitalisation.png)
 
 ## ICU
 
-Every ICU bed will be occupied on on **Sunday 13th February 2022**.
+Every ICU bed will be occupied on on **Wednesday 09th February 2022**.
 
 
-![](2022-01-05/icu.png)
+![](2022-01-06/icu.png)
 
 ## Number of people on ventilators
 
-![](2022-01-05/ventilators.png)
+![](2022-01-06/ventilators.png)
 
 ## Number of confirmed infections
 
-The current outbreak of Covid will peak on **Tuesday 22nd March 2022**.
+The current outbreak of Covid will peak on **Thursday 24th March 2022**.
 
-![](2022-01-05/infection.png)
+![](2022-01-06/infection.png)
 
 ## Deaths
 
-![](2022-01-05/deaths.png)
+![](2022-01-06/deaths.png)
 
 
 # What could be wrong with this model?
@@ -56,21 +56,21 @@ has been getting worse, and I have been too optimistic.
 
 ## Hospitalisation
 
-![](2022-01-05/historical/hospitalisation.png)
+![](2022-01-06/historical/hospitalisation.png)
 
 ## ICU
 
-![](2022-01-05/historical/icu.png)
+![](2022-01-06/historical/icu.png)
 
 ## Number of people on ventilators
 
-![](2022-01-05/historical/ventilators.png)
+![](2022-01-06/historical/ventilators.png)
 
 ## Number of confirmed infections
 
-![](2022-01-05/historical/infection.png)
+![](2022-01-06/historical/infection.png)
 
 ## Deaths
 
-![](2022-01-05/historical/deaths.png)
+![](2022-01-06/historical/deaths.png)
 
