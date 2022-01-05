@@ -11,7 +11,7 @@ This report is available in several formats:
 
 ## Hospitalisation
 
-Hospitals will be saturated on **Friday 18th February 2022**.
+Hospitals will be saturated on **Wednesday 16th February 2022**.
 
 ![](2022-01-05/hospitalisation.png)
 
