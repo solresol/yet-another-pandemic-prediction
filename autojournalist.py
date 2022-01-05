@@ -23,7 +23,9 @@ def get_latest(dataname, column):
 def format_date_nicely(d):
   d = pandas.to_datetime(d)
   day = d.strftime("%d")
-  if day[-1] == "1":
+  if day in ["11", "12", "13"]:
+    day += "th"
+  elif day[-1] == "1":
     day += "st"
   elif day[-1] == "2":
     day += "nd"
