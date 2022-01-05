@@ -87,7 +87,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
     dataset = omicron_hospital.HOSP
-    make_exponential_plot(dataset, "Number of covid-19 patients in hospital (log scale)", ax=ax)
+    make_exponential_plot(dataset, "Number of covid-19 patients in hospital", ax=ax, log_plot=False)
     ax.axhline(20000, color="red")
     ax.annotate(xy=(time_data.when.min(), 22000), s="Number of hospital beds in NSW", color='red')
     model = make_model(dataset)
@@ -100,7 +100,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
     dataset = omicron_hospital.ICU
-    make_exponential_plot(dataset, "Number of covid-19 patients in ICU (log scale)",  ax=ax)
+    make_exponential_plot(dataset, "Number of covid-19 patients in ICU",  ax=ax, log_plot=False)
     ax.axhline(500, color='red')
     ax.axhline(2000, color='red')
     ax.annotate(xy=(time_data.when.min(),550), s="Basic ICU capacity", color='red')
