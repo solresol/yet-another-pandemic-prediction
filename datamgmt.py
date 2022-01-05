@@ -28,7 +28,7 @@ def fetch_covidlive():
     omicron_cases = daily_cases[daily_cases.index > '2021-12-01']
     omicron_tests = daily_tests[daily_tests.index > '2021-12-01']
     omicron_hospital = daily_hospital[daily_hospital.index > '2021-12-01']
-    omicron_deaths = daily_deaths[daily_deaths.index > '2021-12-01']
+    omicron_deaths = daily_deaths[daily_deaths.index > '2021-12-22']
 
     return (omicron_cases, omicron_tests, omicron_hospital, omicron_deaths)
 
