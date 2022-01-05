@@ -17,7 +17,7 @@ Hospitals will be saturated on **Friday 18th February 2022**.
 
 ## ICU
 
-Every ICU bed will be occupied on on **Sunday 13rd February 2022**.
+Every ICU bed will be occupied on on **Sunday 13th February 2022**.
 
 
 ![](2022-01-05/icu.png)
@@ -28,7 +28,7 @@ Every ICU bed will be occupied on on **Sunday 13rd February 2022**.
 
 ## Number of confirmed infections
 
-The current outbreak of Covid will peak on **Wednesday 23rd March 2022**.
+The current outbreak of Covid will peak on **Tuesday 22nd March 2022**.
 
 ![](2022-01-05/infection.png)
 
