@@ -83,11 +83,14 @@ def make_exponential_plot(dataset, title, ax, log_plot=True, saturation_value=No
 h = datamgmt.History()
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
+    fig, axes = matplotlib.pyplot.subplots(figsize=(12,4), ncols=2)
     dataset = omicron_cases.CASES/1e6
-    make_exponential_plot(dataset, "Number of people who have been infected in NSW (millions)", ax, log_plot=False, saturation_value=7.8)
-    ax.axhline(8.16, color="red")
-    ax.annotate(xy=(time_data.when.min(), 7.8), s="Population of NSW", color='red')
+    make_exponential_plot(dataset, "Number of people who have been infected in NSW (millions)", axes[0], log_plot=False, saturation_value=7.8)
+    make_exponential_plot(dataset*1e6, "Number of people who have been infected in NSW - log plot", axes[1], log_plot=True)
+    axes[0].axhline(7.8, color="red")
+    axes[0].annotate(xy=(time_data.when.min(), 7.3), s="Population of NSW", color='red')
+    axes[1].axhline(7800000, color="red")
+    axes[1].annotate(xy=(time_data.when.min(), 6000000), s="Population of NSW", color='red')
     model = make_model(dataset)
     saturation = find_saturation_date(model, 7.8 / 3)
     # I am assuming that we can safely model an exponential until we are at a third of the saturation. After that the infection rates will drop quite quickly.
@@ -97,7 +100,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig.savefig(f"output/{today}/infection.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
+    fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
     dataset = omicron_hospital.HOSP
     make_exponential_plot(dataset, "Number of covid-19 patients in hospital", ax=ax, log_plot=False, saturation_value=20000)
     ax.axhline(20000, color="red")
@@ -105,12 +108,12 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     model = make_model(dataset)
     saturation = find_saturation_date(model, 20000)
     if saturation is not None:
-        h.add_saturation_date_to_history('hospitalisation', today, saturation)    
+        h.add_saturation_date_to_history('hospitalisation', today, saturation)
     h.add_doubling_rate_to_history('hospitalisation', today, doubling_period_of_model(model))
     fig.savefig(f"output/{today}/hospitalisation.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
+    fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
     dataset = omicron_hospital.ICU
     make_exponential_plot(dataset, "Number of covid-19 patients in ICU",  ax=ax, log_plot=False, saturation_value=2000)
     ax.axhline(500, color='red')
@@ -120,13 +123,13 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     model = make_model(dataset)
     saturation = find_saturation_date(model, 550)
     if saturation is not None:
-        h.add_saturation_date_to_history('icu', today, saturation)    
-    
+        h.add_saturation_date_to_history('icu', today, saturation)
+
     h.add_doubling_rate_to_history('icu', today, doubling_period_of_model(model))
     fig.savefig(f"output/{today}/icu.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
+    fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
     dataset = omicron_hospital.VENT
     make_exponential_plot(dataset, "Number of covid-19 patients on ventilators", ax=ax, log_plot=False)
     model = make_model(dataset)
@@ -134,7 +137,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig.savefig(f"output/{today}/ventilators.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(12,5))
+    fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
     dataset = omicron_deaths.DEATHS
     make_exponential_plot(dataset, "Number of covid-19 related deaths", ax=ax, log_plot=False)
     ax.set_ylim(0,1000)
