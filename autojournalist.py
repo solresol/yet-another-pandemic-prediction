@@ -33,6 +33,8 @@ def format_date_nicely(d):
     day += "rd"
   else:
     day += "th"
+  if day[0] == '0':
+    day = day[1:]
   weekday = d.strftime("%A")
   month = d.strftime("%B")
   year = d.strftime("%Y")
