@@ -11,13 +11,13 @@ This report is available in several formats:
 
 ## Hospitalisation
 
-Hospitals will be saturated on **Wednesday 09th February 2022**.
+Hospitals will be saturated on **Wednesday 9th February 2022**.
 
 ![](2022-01-06/hospitalisation.png)
 
 ## ICU
 
-Every ICU bed will be occupied on on **Wednesday 09th February 2022**.
+Every ICU bed will be occupied on on **Wednesday 9th February 2022**.
 
 
 ![](2022-01-06/icu.png)
