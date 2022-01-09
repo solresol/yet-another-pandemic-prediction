@@ -110,6 +110,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     if saturation is not None:
         h.add_saturation_date_to_history('hospitalisation', today, saturation)
     h.add_doubling_rate_to_history('hospitalisation', today, doubling_period_of_model(model))
+    hospitals_saturated = saturation
     fig.savefig(f"output/{today}/hospitalisation.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
@@ -140,7 +141,9 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
     dataset = omicron_deaths.DEATHS
     make_exponential_plot(dataset, "Number of covid-19 related deaths", ax=ax, log_plot=False)
-    ax.set_ylim(0,1000)
+    ax.set_ylim(0,5000)
+    ax.axvline(hospitals_saturated, linestyle="--", color="grey")
+    ax.annotate(xy=(hospitals_saturated, 750), s="Hospital saturation date")
     model = make_model(dataset)
     h.add_doubling_rate_to_history('deaths', today, doubling_period_of_model(model))
     fig.savefig(f"output/{today}/deaths.png")
