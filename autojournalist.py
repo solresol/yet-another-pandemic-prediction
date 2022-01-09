@@ -83,6 +83,9 @@ This report is available in several formats:
 
 ## Deaths
 
+{'There are no obvious reasons to expect the death rate to change.' if hospital_saturation is None else 'After ' + format_date_nicely(hospital_saturation) + ' (when hospitals are saturated), we should expect to see the death rate increase significantly.'}
+
+
 ![]({today}/deaths.png)
 
 
