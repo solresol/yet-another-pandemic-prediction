@@ -11,13 +11,13 @@ This report is available in several formats:
 
 ## Hospitalisation
 
-Hospitals will be saturated on **Wednesday 9th February 2022**.
+Hospitals will be saturated on **Monday 31st January 2022**.
 
 ![](2022-01-09/hospitalisation.png)
 
 ## ICU
 
-Every ICU bed will be occupied on on **Monday 7th February 2022**.
+Every ICU bed will be occupied on on **Wednesday 26th January 2022**.
 
 
 ![](2022-01-09/icu.png)
@@ -33,6 +33,9 @@ The current outbreak of Covid will peak on **Friday 11th March 2022**.
 ![](2022-01-09/infection.png)
 
 ## Deaths
+
+After Monday 31st January 2022 (when hospitals are saturated), we should expect to see the death rate increase significantly.
+
 
 ![](2022-01-09/deaths.png)
 
