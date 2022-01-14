@@ -1,43 +1,43 @@
-# NSW Covid Update for 2022-01-14
+# NSW Covid Update for 2022-01-15
 
 This report is available in several formats:
 
-- [NSW Covid Report 2022-01-14 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-14/nsw-covid-report-2022-01-14.pdf)
+- [NSW Covid Report 2022-01-15 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-15/nsw-covid-report-2022-01-15.pdf)
 
-- [NSW Covid Report 2022-01-14 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-14/nsw-covid-report-2022-01-14.docx)
+- [NSW Covid Report 2022-01-15 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-15/nsw-covid-report-2022-01-15.docx)
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
 
 ## Hospitalisation
 
-Hospitals will be saturated on **Wednesday 2nd February 2022**.
+Hospitals will be saturated on **Thursday 3rd February 2022**.
 
-![](2022-01-14/hospitalisation.png)
+![](2022-01-15/hospitalisation.png)
 
 ## ICU
 
-Every ICU bed will be occupied on on **Thursday 27th January 2022**.
+Every ICU bed will be occupied on on **Saturday 29th January 2022**.
 
 
-![](2022-01-14/icu.png)
+![](2022-01-15/icu.png)
 
 ## Number of people on ventilators
 
-![](2022-01-14/ventilators.png)
+![](2022-01-15/ventilators.png)
 
 ## Number of confirmed infections
 
-The current outbreak of Covid will peak on **Sunday 20th February 2022**.
+The current outbreak of Covid will peak on **Wednesday 23rd February 2022**.
 
-![](2022-01-14/infection.png)
+![](2022-01-15/infection.png)
 
 ## Deaths
 
-After Wednesday 2nd February 2022 (when hospitals are saturated), we should expect to see the death rate increase significantly.
+After Thursday 3rd February 2022 (when hospitals are saturated), we should expect to see the death rate increase significantly.
 
 
-![](2022-01-14/deaths.png)
+![](2022-01-15/deaths.png)
 
 
 # What could be wrong with this model?
@@ -59,21 +59,21 @@ has been getting worse, and I have been too optimistic.
 
 ## Hospitalisation
 
-![](2022-01-14/historical/hospitalisation.png)
+![](2022-01-15/historical/hospitalisation.png)
 
 ## ICU
 
-![](2022-01-14/historical/icu.png)
+![](2022-01-15/historical/icu.png)
 
 ## Number of people on ventilators
 
-![](2022-01-14/historical/ventilators.png)
+![](2022-01-15/historical/ventilators.png)
 
 ## Number of confirmed infections
 
-![](2022-01-14/historical/infection.png)
+![](2022-01-15/historical/infection.png)
 
 ## Deaths
 
-![](2022-01-14/historical/deaths.png)
+![](2022-01-15/historical/deaths.png)
 
