@@ -100,7 +100,8 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig.savefig(f"output/{today}/infection.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
+    fig, axes = matplotlib.pyplot.subplots(figsize=(12,4), ncols=2)
+    ax = axes[0]
     dataset = omicron_hospital.HOSP
     make_exponential_plot(dataset, "Number of covid-19 patients in hospital", ax=ax, log_plot=False, saturation_value=20000)
     ax.axhline(20000, color="red")
@@ -111,10 +112,13 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
         h.add_saturation_date_to_history('hospitalisation', today, saturation)
     h.add_doubling_rate_to_history('hospitalisation', today, doubling_period_of_model(model))
     hospitals_saturated = saturation
+    make_exponential_plot(dataset, "Number of covid-19 patients in hospital (log plot)", ax=axes[1], log_plot=True, saturation_value=20000)
+    axes[1].axhline(20000, color="red")
     fig.savefig(f"output/{today}/hospitalisation.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
+    fig, axes = matplotlib.pyplot.subplots(figsize=(12,4),ncols=2)
+    ax = axes[0]
     dataset = omicron_hospital.ICU
     make_exponential_plot(dataset, "Number of covid-19 patients in ICU",  ax=ax, log_plot=False, saturation_value=2000)
     ax.axhline(500, color='red')
@@ -127,14 +131,22 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
         h.add_saturation_date_to_history('icu', today, saturation)
 
     h.add_doubling_rate_to_history('icu', today, doubling_period_of_model(model))
+
+    make_exponential_plot(dataset, "Number of covid-19 patients in ICU (log plot)",  ax=axes[1], log_plot=True, saturation_value=2000)
+    axes[1].axhline(500, color='red')
+    axes[1].axhline(2000, color='red')
+
     fig.savefig(f"output/{today}/icu.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
+    fig, axes = matplotlib.pyplot.subplots(figsize=(12,4), ncols=2)
+    ax = axes[0]
     dataset = omicron_hospital.VENT
     make_exponential_plot(dataset, "Number of covid-19 patients on ventilators", ax=ax, log_plot=False)
     model = make_model(dataset)
     h.add_doubling_rate_to_history('ventilators', today, doubling_period_of_model(model))
+    make_exponential_plot(dataset, "Number of covid-19 patients on ventilators (log plot)", ax=axes[1], log_plot=True)
+
     fig.savefig(f"output/{today}/ventilators.png")
 
 with matplotlib.pyplot.style.context('seaborn-darkgrid'):
