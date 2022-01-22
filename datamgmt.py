@@ -25,10 +25,12 @@ def fetch_covidlive():
     daily_hospital.sort_index(inplace=True)
     daily_deaths.sort_index(inplace=True)
     
-    omicron_cases = daily_cases[daily_cases.index > '2021-12-01']
-    omicron_tests = daily_tests[daily_tests.index > '2021-12-01']
-    omicron_hospital = daily_hospital[daily_hospital.index > '2021-12-15']
-    omicron_deaths = daily_deaths[daily_deaths.index > '2022-01-01']
+    omicron_cases = daily_cases[daily_cases.index >= '2021-12-01']
+    omicron_tests = daily_tests[daily_tests.index >= '2021-12-01']
+    #omicron_hospital = daily_hospital[daily_hospital.index > '2021-12-15']
+    #omicron_deaths = daily_deaths[daily_deaths.index > '2022-01-01']
+    omicron_hospital = daily_hospital[daily_hospital.index >= '2021-12-01']
+    omicron_deaths = daily_deaths[daily_deaths.index >= '2021-12-01']
 
     return (omicron_cases, omicron_tests, omicron_hospital, omicron_deaths)
 
