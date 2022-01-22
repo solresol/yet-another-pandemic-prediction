@@ -40,10 +40,6 @@ def format_date_nicely(d):
   year = d.strftime("%Y")
   return f"{weekday} {day} {month} {year}"
 
-infection_saturation = get_latest('infection', 'Saturation Date')  
-hospital_saturation = get_latest('hospitalisation', 'Saturation Date')
-icu_saturation = get_latest('icu', 'Saturation Date')
-
 today = time.strftime("%Y-%m-%d")
 
 with open('output/README.md', 'w') as markdown:
@@ -57,87 +53,49 @@ This report is available in several formats:
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
+## Deaths
+
+![]({today}/deaths.png)
+
+
 
 ## Hospitalisation
 
-{'Hospitals will not be saturated in the foreseeable future.' if hospital_saturation is None else 'Hospitals will be saturated on **' + format_date_nicely(hospital_saturation) + '**.'}
+This model isn't smart enough to realise that people get better and leave the hospital.
+So it ends up predicting a flat line instead of dropping back down to zero.
 
 ![]({today}/hospitalisation.png)
 
 ## ICU
 
-{'ICU beds will continue to be available for the foreseeable future.' if icu_saturation is None else 'Every ICU bed will be occupied on on **' + format_date_nicely(icu_saturation) + '**.'}
-
+This model isn't smart enough to realise that people eventually leave the ICU
+(either by dying or recovering).
+So it ends up predicting a flat line instead of dropping back down to zero.
 
 ![]({today}/icu.png)
 
 ## Number of people on ventilators
 
+This model isn't smart enough to realise that people only need ventilators for
+a short time (either they recover or they die). So it ends up predicting a flat line.
+
 ![]({today}/ventilators.png)
 
 ## Number of confirmed infections
 
-{'It is not possible to predict accurately when the current outbreak will peak. It is too far in the future.' if infection_saturation is None else 'The current outbreak of Covid will peak on **' + format_date_nicely(infection_saturation) + '**.'}
+Note that this is a *log* scale chart. Going up by one line in the chart means
+10 times as many people have been infected. It is possible that 
+there are vastly more cases than have been reported (e.g. people who took a RAT test and then stayed home until they recovered without telling anyone and without taking a PCR test); so maybe Omicron will saturate the population sooner than my model predicts and so we'll never get to filling the hospitals.
 
 ![]({today}/infection.png)
-
-## Deaths
-
-{'There are no obvious reasons to expect the death rate to change.' if hospital_saturation is None else 'After ' + format_date_nicely(hospital_saturation) + ' (when hospitals are saturated), we should expect to see the death rate increase significantly.'}
-
-
-![]({today}/deaths.png)
 
 
 # What could be wrong with this model?
 
-- Maybe unvaccinated people are catching Omicron first, and then having the worst outcomes, and going to hospital. So maybe once Omicron has churned through them, the number of hospital places will stop rising.
-
-- Maybe there are vastly more cases than have been reported (e.g. people who took a RAT test and then stayed home until they recovered without telling anyone and without taking a PCR test); so maybe Omicron will saturate the population sooner than my model predicts and so we'll never get to filling the hospitals.
-
-- Maybe the booster doses will have an unexpected effect on the number of people in hospitals, etc. That is, if the booster makes you 8 times less likely to need to go to hospital, then that just delays the date when the hospitals are overloaded by 3 weeks. But if the booster dose has super powers (1000 times less likely to need to go to hospital), then we might never saturate.
+- The hospitalisation, ICU and ventilator models all regress a logistic curve. They
+should regress a curve that returns back down to zero.
 
 - I'm calculating everything independently of each other (hospitalisations aren't modelled as having a relationship to the number of cases). The further out you go the less accurate it is. Perhaps my inaccuracies are piling up so that even predicting 7 weeks into the future is wrong.
 
-# How trustworthy is this?
-
-Here are some charts of how my predictions have changed over time.
-
-A flat line means that I have been quite consistent. A line trending down means that the situation
-has been getting worse, and I have been too optimistic.
-
-## Hospitalisation
-
-![]({today}/historical/hospitalisation.png)
-
-## ICU
-
-![]({today}/historical/icu.png)
-
-## Number of people on ventilators
-
-![]({today}/historical/ventilators.png)
-
-## Number of confirmed infections
-
-![]({today}/historical/infection.png)
-
-## Deaths
-
-![]({today}/historical/deaths.png)
-
 """)
 
-
-os.makedirs(f'output/{today}/historical', exist_ok=True)
-for history in ['deaths', 'hospitalisation', 'icu', 'infection', 'ventilators']:
-  with matplotlib.pyplot.style.context('seaborn-darkgrid'):
-    fig, ax = matplotlib.pyplot.subplots(figsize=(8,6))
-    csv = getattr(h, history)
-    csv['Doubling Rate'].plot(ax=ax)
-    ax.set_title(f"Predictions of the {history} doubling rate over time")
-    ax.set_ylim(0, csv['Doubling Rate'].max() * 1.1)
-    ax.set_ylabel(f"I said that the {history} rate appears to be doubling every _ number of days")
-    ax.set_xlabel("When I made that prediction")
-    fig.tight_layout()
-    fig.savefig(f'output/{today}/historical/{history}.png')
