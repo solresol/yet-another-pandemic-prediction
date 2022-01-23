@@ -24,7 +24,7 @@ def fetch_covidlive():
     daily_tests.sort_index(inplace=True)
     daily_hospital.sort_index(inplace=True)
     daily_deaths.sort_index(inplace=True)
-    
+
     omicron_cases = daily_cases[daily_cases.index >= '2021-12-01']
     omicron_tests = daily_tests[daily_tests.index >= '2021-12-01']
     #omicron_hospital = daily_hospital[daily_hospital.index > '2021-12-15']
@@ -44,7 +44,7 @@ class History:
             self.__data[data_name] = pandas.read_csv(filename)
             self.__data[data_name]['Date'] = pandas.to_datetime(self.__data[data_name]['Date'])
             self.__data[data_name].set_index('Date', inplace=True)
-            
+
     def __getattr__(self, data_name):
         return self.__data[data_name].copy()
 
@@ -79,4 +79,27 @@ class History:
             csv = self.__data[data_name]
             csv.sort_index(inplace=True)
             csv.index.rename('Date', inplace=True)
-        csv.to_csv(f"historical/{data_name}.csv")            
+        csv.to_csv(f"historical/{data_name}.csv")
+
+    def add_logistic_parameters_to_history(self, data_name, date, baseline, asymptote, midpoint, steepness):
+        csv = self.__data[data_name]
+        # Give me your worst date format, and I'll handle it
+        date = pandas.to_datetime(date)
+        if date in set(csv.index):
+            csv.loc[date, 'Baseline'] = baseline
+            csv.loc[date, 'Asymptote'] = asymptote
+            csv.loc[date, 'Midpoint'] = midpoint
+            csv.loc[date, 'Steepness'] = steepness
+        else:
+            new_csv = pandas.DataFrame(
+                {
+                    'Baseline': pandas.Series(data=[baseline], index=[date]),
+                    'Asymptote': pandas.Series(data=[asymptote], index=[date]),
+                    'Midpoint': pandas.Series(data=[midpoint], index=[date]),
+                    'Steepness': pandas.Series(data=[steepness], index=[date])
+                })
+            self.__data[data_name] = pandas.concat([csv, new_csv])
+            csv = self.__data[data_name]
+            csv.sort_index(inplace=True)
+            csv.index.rename('Date', inplace=True)
+        csv.to_csv(f"historical/{data_name}.csv")

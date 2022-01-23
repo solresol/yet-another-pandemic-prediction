@@ -8,6 +8,7 @@ import matplotlib.pyplot
 import os
 import numpy
 import pandas
+import model
 
 h = datamgmt.History()
 
@@ -19,6 +20,38 @@ def get_latest(dataname, column):
     return latest[column]
   else:
     return None
+
+def get_latest_model(dataname):
+  baseline = get_latest(dataname, 'Baseline')
+  asymptote = get_latest(dataname, 'Asymptote')
+  midpoint = get_latest(dataname, 'Midpoint')
+  steepness = get_latest(dataname, 'Steepness')
+  return lambda x: model.logistic_curve_calculate((baseline, asymptote, midpoint, steepness), x)
+
+def predict(dataname, days_in_the_future):
+  global h
+  source = getattr(h, dataname)
+  m = get_latest_model(dataname)
+  latest_day = source.index.max().timestamp() / 86400
+  prediction_date = days_in_the_future + latest_day
+  return m(prediction_date)
+
+def get_peak_date(dataname):
+  midpoint = get_latest(dataname, 'Midpoint')
+  return format_date_nicely(midpoint * 86400 * 1e9)
+
+def peak_is_in_the_future(dataname):
+  midpoint = get_latest(dataname, 'Midpoint')
+  midpoint_tstamp = midpoint * 86400 * 1e9
+  return pandas.to_datetime(midpoint_tstamp) > pandas.to_datetime('now')
+
+def format_future_nicely(dataname, days_in_the_future):
+  global h
+  source = getattr(h, dataname)
+  m = get_latest_model(dataname)
+  latest_day = source.index.max().timestamp() / 86400
+  prediction_date = days_in_the_future + latest_day
+  return format_date_nicely(prediction_date * 86400 * 1e9)
 
 def format_date_nicely(d):
   d = pandas.to_datetime(d)
@@ -55,6 +88,19 @@ This report is available in several formats:
 
 ## Deaths
 
+Predictions:
+
+| When | Total Deaths | Deaths that Day |
+| ---- | ------------ | --------------- |
+| { format_future_nicely('deaths', 1)} | { round(predict('deaths', 1)) } | { round(predict('deaths', 1) - predict('deaths', 0)) } |
+| { format_future_nicely('deaths', 7)} | { round(predict('deaths', 7)) } | { round(predict('deaths', 7) - predict('deaths', 6)) } |
+| { format_future_nicely('deaths', 30)} | { round(predict('deaths', 30)) } | { round(predict('deaths', 30) - predict('deaths', 29)) } |
+
+The death rate { "will peak on" if (peak_is_in_the_future('deaths')) else "peaked on" } **{ get_peak_date('deaths') }**.
+
+The final number of deaths (long-term) will
+be close to **{ round(get_latest('deaths', 'Asymptote')) }**.
+
 ![]({today}/deaths.png)
 
 
@@ -64,6 +110,8 @@ This report is available in several formats:
 This model isn't smart enough to realise that people get better and leave the hospital.
 So it ends up predicting a flat line instead of dropping back down to zero.
 
+The number of people going into hospital { "will peak on" if (peak_is_in_the_future('hospitalisation')) else "peaked on" } **{ get_peak_date('hospitalisation') }**.
+
 ![]({today}/hospitalisation.png)
 
 ## ICU
@@ -72,6 +120,8 @@ This model isn't smart enough to realise that people eventually leave the ICU
 (either by dying or recovering).
 So it ends up predicting a flat line instead of dropping back down to zero.
 
+The number of people going into ICU { "will peak on" if (peak_is_in_the_future('icu')) else "peaked on" } **{ get_peak_date('icu') }**.
+
 ![]({today}/icu.png)
 
 ## Number of people on ventilators
@@ -79,15 +129,37 @@ So it ends up predicting a flat line instead of dropping back down to zero.
 This model isn't smart enough to realise that people only need ventilators for
 a short time (either they recover or they die). So it ends up predicting a flat line.
 
+The number of people needing ventilators { "will peak on" if (peak_is_in_the_future('ventilators')) else "peaked on" } **{ get_peak_date('ventilators') }**.
+
 ![]({today}/ventilators.png)
 
 ## Number of confirmed infections
 
-Note that this is a *log* scale chart. Going up by one line in the chart means
-10 times as many people have been infected. It is possible that 
-there are vastly more cases than have been reported (e.g. people who took a RAT test and then stayed home until they recovered without telling anyone and without taking a PCR test); so maybe Omicron will saturate the population sooner than my model predicts and so we'll never get to filling the hospitals.
+| When | Total Infections | Infections that day |
+| ---- | ------------ | --------------- |
+| {format_future_nicely('infection', 1)} | { round(predict('infection', 1)) } | { round(predict('infection', 1) - predict('infection', 0)) } |
+| {format_future_nicely('infection', 7)} | { round(predict('infection', 7)) } | { round(predict('infection', 7) - predict('infection', 6)) } |
+| {format_future_nicely('infection', 14)} | { round(predict('infection', 14)) } | { round(predict('infection', 14) - predict('infection', 13)) } |
+| {format_future_nicely('infection', 30)} | { round(predict('infection', 30)) } | { round(predict('infection', 30) - predict('infection', 29)) } |
+
+The final number of infections (long-term) will
+be close to **{ round(get_latest('infection', 'Asymptote')) }**.
+
+
+According to the model, the number of people getting infected each day { "will peak on" if (peak_is_in_the_future('infection')) else "peaked on" } **{ get_peak_date('infection') }**. This is a smoothed-out version of reality.
+
+Note that the first chart (showing the population) is a *log* scale chart. Going up by one line in the chart means 10 times as many people have been infected. 
+
+It is possible that there are vastly more cases than have been
+reported (e.g. people who took a RAT test and then stayed home until
+they recovered without telling anyone and without taking a PCR test);
+it is also possible that people aren't testing (because they can't get
+RAT tests and because of the disincentives to testing) and so the
+numbers here are lower than reality.
+
 
 ![]({today}/infection.png)
+
 
 
 # What could be wrong with this model?
