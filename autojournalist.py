@@ -92,14 +92,14 @@ Predictions:
 
 | When | Total Deaths | Deaths that Day |
 | ---- | ------------ | --------------- |
-| { format_future_nicely('deaths', 1)} | { round(predict('deaths', 1)) } | { round(predict('deaths', 1) - predict('deaths', 0)) } |
-| { format_future_nicely('deaths', 7)} | { round(predict('deaths', 7)) } | { round(predict('deaths', 7) - predict('deaths', 6)) } |
-| { format_future_nicely('deaths', 30)} | { round(predict('deaths', 30)) } | { round(predict('deaths', 30) - predict('deaths', 29)) } |
+| { format_future_nicely('deaths', 1)} | { int(predict('deaths', 1)) } | { int(predict('deaths', 1) - predict('deaths', 0)) } |
+| { format_future_nicely('deaths', 7)} | { int(predict('deaths', 7)) } | { int(predict('deaths', 7) - predict('deaths', 6)) } |
+| { format_future_nicely('deaths', 30)} | { int(predict('deaths', 30)) } | { int(predict('deaths', 30) - predict('deaths', 29)) } |
 
 The death rate { "will peak on" if (peak_is_in_the_future('deaths')) else "peaked on" } **{ get_peak_date('deaths') }**.
 
 The final number of deaths (long-term) will
-be close to **{ round(get_latest('deaths', 'Asymptote')) }**.
+be close to **{ int(get_latest('deaths', 'Asymptote')) }**.
 
 ![]({today}/deaths.png)
 
@@ -135,15 +135,17 @@ The number of people needing ventilators { "will peak on" if (peak_is_in_the_fut
 
 ## Number of confirmed infections
 
+Predictions:
+
 | When | Total Infections | Infections that day |
 | ---- | ------------ | --------------- |
-| {format_future_nicely('infection', 1)} | { round(predict('infection', 1)) } | { round(predict('infection', 1) - predict('infection', 0)) } |
-| {format_future_nicely('infection', 7)} | { round(predict('infection', 7)) } | { round(predict('infection', 7) - predict('infection', 6)) } |
-| {format_future_nicely('infection', 14)} | { round(predict('infection', 14)) } | { round(predict('infection', 14) - predict('infection', 13)) } |
-| {format_future_nicely('infection', 30)} | { round(predict('infection', 30)) } | { round(predict('infection', 30) - predict('infection', 29)) } |
+| {format_future_nicely('infection', 1)} | { int(predict('infection', 1)) } | { int(predict('infection', 1) - predict('infection', 0)) } |
+| {format_future_nicely('infection', 7)} | { int(predict('infection', 7)) } | { int(predict('infection', 7) - predict('infection', 6)) } |
+| {format_future_nicely('infection', 14)} | { int(predict('infection', 14)) } | { int(predict('infection', 14) - predict('infection', 13)) } |
+| {format_future_nicely('infection', 30)} | { int(predict('infection', 30)) } | { int(predict('infection', 30) - predict('infection', 29)) } |
 
 The final number of infections (long-term) will
-be close to **{ round(get_latest('infection', 'Asymptote')) }**.
+be close to **{ int(get_latest('infection', 'Asymptote')) }**.
 
 
 According to the model, the number of people getting infected each day { "will peak on" if (peak_is_in_the_future('infection')) else "peaked on" } **{ get_peak_date('infection') }**. This is a smoothed-out version of reality.
