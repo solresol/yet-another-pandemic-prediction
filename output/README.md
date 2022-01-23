@@ -14,14 +14,14 @@ Predictions:
 
 | When | Total Deaths | Deaths that Day |
 | ---- | ------------ | --------------- |
-| Monday 24th January 2022 | 1154.0 | 39.0 |
-| Sunday 30th January 2022 | 1371.0 | 33.0 |
-| Tuesday 22nd February 2022 | 1655.0 | 2.0 |
+| Monday 24th January 2022 | 1154 | 38 |
+| Sunday 30th January 2022 | 1371 | 32 |
+| Tuesday 22nd February 2022 | 1655 | 2 |
 
 The death rate will peak on **Monday 24th January 2022**.
 
 The final number of deaths (long-term) will
-be close to **1669.0**.
+be close to **1668**.
 
 ![](2022-01-23/deaths.png)
 
@@ -59,13 +59,13 @@ The number of people needing ventilators peaked on **Saturday 8th January 2022**
 
 | When | Total Infections | Infections that day |
 | ---- | ------------ | --------------- |
-| Monday 24th January 2022 | 994703.0 | 17393.0 |
-| Sunday 30th January 2022 | 1058530.0 | 6909.0 |
-| Sunday 6th February 2022 | 1084614.0 | 2099.0 |
-| Tuesday 22nd February 2022 | 1094864.0 | 124.0 |
+| Monday 24th January 2022 | 994883 | 17366 |
+| Sunday 30th January 2022 | 1058601 | 6896 |
+| Sunday 6th February 2022 | 1084635 | 2094 |
+| Tuesday 22nd February 2022 | 1094865 | 123 |
 
 The final number of infections (long-term) will
-be close to **1095497.0**.
+be close to **1095496**.
 
 
 According to the model, the number of people getting infected each day peaked on **Wednesday 12th January 2022**. This is a smoothed-out version of reality.
