@@ -1,16 +1,29 @@
-# NSW Covid Update for 2022-01-22
+# NSW Covid Update for 2022-01-23
 
 This report is available in several formats:
 
-- [NSW Covid Report 2022-01-22 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-22/nsw-covid-report-2022-01-22.pdf)
+- [NSW Covid Report 2022-01-23 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-23/nsw-covid-report-2022-01-23.pdf)
 
-- [NSW Covid Report 2022-01-22 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-22/nsw-covid-report-2022-01-22.docx)
+- [NSW Covid Report 2022-01-23 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-23/nsw-covid-report-2022-01-23.docx)
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
 ## Deaths
 
-![](2022-01-22/deaths.png)
+Predictions:
+
+| When | Total Deaths | Deaths that Day |
+| ---- | ------------ | --------------- |
+| Monday 24th January 2022 | 1154.0 | 39.0 |
+| Sunday 30th January 2022 | 1371.0 | 33.0 |
+| Tuesday 22nd February 2022 | 1655.0 | 2.0 |
+
+The death rate will peak on **Monday 24th January 2022**.
+
+The final number of deaths (long-term) will
+be close to **1669.0**.
+
+![](2022-01-23/deaths.png)
 
 
 
@@ -19,7 +32,9 @@ This report is available in several formats:
 This model isn't smart enough to realise that people get better and leave the hospital.
 So it ends up predicting a flat line instead of dropping back down to zero.
 
-![](2022-01-22/hospitalisation.png)
+The number of people going into hospital peaked on **Wednesday 5th January 2022**.
+
+![](2022-01-23/hospitalisation.png)
 
 ## ICU
 
@@ -27,22 +42,46 @@ This model isn't smart enough to realise that people eventually leave the ICU
 (either by dying or recovering).
 So it ends up predicting a flat line instead of dropping back down to zero.
 
-![](2022-01-22/icu.png)
+The number of people going into ICU peaked on **Wednesday 5th January 2022**.
+
+![](2022-01-23/icu.png)
 
 ## Number of people on ventilators
 
 This model isn't smart enough to realise that people only need ventilators for
 a short time (either they recover or they die). So it ends up predicting a flat line.
 
-![](2022-01-22/ventilators.png)
+The number of people needing ventilators peaked on **Saturday 8th January 2022**.
+
+![](2022-01-23/ventilators.png)
 
 ## Number of confirmed infections
 
-Note that this is a *log* scale chart. Going up by one line in the chart means
-10 times as many people have been infected. It is possible that 
-there are vastly more cases than have been reported (e.g. people who took a RAT test and then stayed home until they recovered without telling anyone and without taking a PCR test); so maybe Omicron will saturate the population sooner than my model predicts and so we'll never get to filling the hospitals.
+| When | Total Infections | Infections that day |
+| ---- | ------------ | --------------- |
+| Monday 24th January 2022 | 994703.0 | 17393.0 |
+| Sunday 30th January 2022 | 1058530.0 | 6909.0 |
+| Sunday 6th February 2022 | 1084614.0 | 2099.0 |
+| Tuesday 22nd February 2022 | 1094864.0 | 124.0 |
 
-![](2022-01-22/infection.png)
+The final number of infections (long-term) will
+be close to **1095497.0**.
+
+
+According to the model, the number of people getting infected each day peaked on **Wednesday 12th January 2022**. This is a smoothed-out version of reality.
+
+Note that the first chart (showing the population) is a *log* scale chart. Going up by one line in the chart means 10 times as many people have been infected. 
+
+It is possible that there are vastly more cases than have been
+reported (e.g. people who took a RAT test and then stayed home until
+they recovered without telling anyone and without taking a PCR test);
+it is also possible that people aren't testing (because they can't get
+RAT tests and because of the disincentives to testing) and so the
+numbers here are lower than reality.
+
+
+![](2022-01-23/infection.png)
+
 
 
 # What could be wrong with this model?
