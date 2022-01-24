@@ -1,10 +1,10 @@
-# NSW Covid Update for 2022-01-24
+# NSW Covid Update for 2022-01-25
 
 This report is available in several formats:
 
-- [NSW Covid Report 2022-01-24 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-24/nsw-covid-report-2022-01-24.pdf)
+- [NSW Covid Report 2022-01-25 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-25/nsw-covid-report-2022-01-25.pdf)
 
-- [NSW Covid Report 2022-01-24 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-24/nsw-covid-report-2022-01-24.docx)
+- [NSW Covid Report 2022-01-25 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-01-25/nsw-covid-report-2022-01-25.docx)
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
@@ -14,16 +14,16 @@ Predictions:
 
 | When | Total Deaths | Deaths that Day |
 | ---- | ------------ | --------------- |
-| Tuesday 25th January 2022 | 1163 | 32 |
-| Monday 31st January 2022 | 1322 | 21 |
-| Wednesday 23rd February 2022 | 1478 | 0 |
+| Wednesday 26th January 2022 | 1186 | 29 |
+| Tuesday 1st February 2022 | 1321 | 17 |
+| Thursday 24th February 2022 | 1438 | 0 |
 
-The death rate peaked on **Saturday 22nd January 2022**.
+The death rate peaked on **Friday 21st January 2022**.
 
 The final number of deaths (long-term) will
-be close to **1483**.
+be close to **1442**.
 
-![](2022-01-24/deaths.png)
+![](2022-01-25/deaths.png)
 
 
 
@@ -34,7 +34,7 @@ So it ends up predicting a flat line instead of dropping back down to zero.
 
 The number of people going into hospital peaked on **Wednesday 5th January 2022**.
 
-![](2022-01-24/hospitalisation.png)
+![](2022-01-25/hospitalisation.png)
 
 ## ICU
 
@@ -42,9 +42,9 @@ This model isn't smart enough to realise that people eventually leave the ICU
 (either by dying or recovering).
 So it ends up predicting a flat line instead of dropping back down to zero.
 
-The number of people going into ICU peaked on **Wednesday 5th January 2022**.
+The number of people going into ICU peaked on **Tuesday 4th January 2022**.
 
-![](2022-01-24/icu.png)
+![](2022-01-25/icu.png)
 
 ## Number of people on ventilators
 
@@ -53,7 +53,7 @@ a short time (either they recover or they die). So it ends up predicting a flat 
 
 The number of people needing ventilators peaked on **Saturday 8th January 2022**.
 
-![](2022-01-24/ventilators.png)
+![](2022-01-25/ventilators.png)
 
 ## Number of confirmed infections
 
@@ -61,13 +61,13 @@ Predictions:
 
 | When | Total Infections | Infections that day |
 | ---- | ------------ | --------------- |
-| Tuesday 25th January 2022 | 1005171 | 14875 |
-| Monday 31st January 2022 | 1058802 | 5727 |
-| Monday 7th February 2022 | 1080214 | 1708 |
-| Wednesday 23rd February 2022 | 1088486 | 98 |
+| Wednesday 26th January 2022 | 1016563 | 12677 |
+| Tuesday 1st February 2022 | 1061662 | 4769 |
+| Tuesday 8th February 2022 | 1079379 | 1405 |
+| Thursday 24th February 2022 | 1086158 | 79 |
 
 The final number of infections (long-term) will
-be close to **1088986**.
+be close to **1086564**.
 
 
 According to the model, the number of people getting infected each day peaked on **Wednesday 12th January 2022**. This is a smoothed-out version of reality.
@@ -82,7 +82,7 @@ RAT tests and because of the disincentives to testing) and so the
 numbers here are lower than reality.
 
 
-![](2022-01-24/infection.png)
+![](2022-01-25/infection.png)
 
 
 
