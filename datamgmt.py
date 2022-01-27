@@ -1,12 +1,26 @@
 import pandas
 import glob
 import os
+import time
 
 def fetch_covidlive():
-    daily_cases = pandas.read_html('https://covidlive.com.au/report/daily-cases/nsw')[1]
-    daily_tests = pandas.read_html('https://covidlive.com.au/report/daily-tests/nsw')[1]
-    daily_hospital = pandas.read_html('https://covidlive.com.au/report/daily-hospitalised/nsw')[1]
-    daily_deaths = pandas.read_html('https://covidlive.com.au/report/daily-deaths/nsw')[1]
+    today = time.strftime("%Y-%m-%d")
+    cache = f'.temp_cache/{today}'
+    if os.path.exists(cache):
+        daily_cases = pandas.read_csv('{cache}/daily_cases.csv')
+        daily_tests = pandas.read_csv('{cache}/daily_tests.csv')
+        daily_hospital = pandas.read_csv('{cache}/daily_hospital.csv')
+        daily_deaths = pandas.read_csv('{cache}/daily_deaths.csv')
+    else:
+        daily_cases = pandas.read_html('https://covidlive.com.au/report/daily-cases/nsw')[1]
+        daily_tests = pandas.read_html('https://covidlive.com.au/report/daily-tests/nsw')[1]
+        daily_hospital = pandas.read_html('https://covidlive.com.au/report/daily-hospitalised/nsw')[1]
+        daily_deaths = pandas.read_html('https://covidlive.com.au/report/daily-deaths/nsw')[1]
+        os.makedirs(f'.temp-cache/{today}', exist_ok=True)
+        daily_cases.to_csv(f'.temp-cache/{today}/daily_cases.csv', index=False)
+        daily_tests.to_csv(f'.temp-cache/{today}/daily_tests.csv', index=False)
+        daily_hospital.to_csv(f'.temp-cache/{today}/daily_hospital.csv', index=False)
+        daily_deaths.to_csv(f'.temp-cache/{today}/daily_deaths.csv', index=False)            
 
     daily_cases['DATE'] = pandas.to_datetime(daily_cases.DATE)
     daily_tests['DATE'] = pandas.to_datetime(daily_tests.DATE)

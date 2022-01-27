@@ -133,7 +133,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
     deaths_result = scipy.optimize.minimize(
         error_on_logistic_curve, 
-        [635,1500,19000, 0.15],
+        [635,1500,19010, 0.15],
         (omicron_deaths.DEATHS, time_data.when_tstamp),
         tol=0.1
     )
