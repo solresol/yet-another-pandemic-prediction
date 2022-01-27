@@ -14,14 +14,14 @@ Predictions:
 
 | When | Total Deaths | Deaths that Day |
 | ---- | ------------ | --------------- |
-| Friday 28th January 2022 | 744 | 0 |
-| Thursday 3rd February 2022 | 744 | 0 |
-| Saturday 26th February 2022 | 1490 | 14 |
+| Friday 28th January 2022 | 1233 | 24 |
+| Thursday 3rd February 2022 | 1337 | 12 |
+| Saturday 26th February 2022 | 1416 | 0 |
 
-The death rate will peak on **Tuesday 22nd February 2022**.
+The death rate peaked on **Friday 21st January 2022**.
 
 The final number of deaths (long-term) will
-be close to **1498**.
+be close to **1418**.
 
 ![](2022-01-27/deaths.png)
 
@@ -61,10 +61,10 @@ Predictions:
 
 | When | Total Infections | Infections that day |
 | ---- | ------------ | --------------- |
-| Friday 28th January 2022 | 1040736 | 9557 |
-| Thursday 3rd February 2022 | 1074321 | 3526 |
-| Thursday 10th February 2022 | 1087399 | 1038 |
-| Saturday 26th February 2022 | 1092431 | 60 |
+| Friday 28th January 2022 | 1041059 | 9501 |
+| Thursday 3rd February 2022 | 1074439 | 3504 |
+| Thursday 10th February 2022 | 1087433 | 1031 |
+| Saturday 26th February 2022 | 1092433 | 59 |
 
 The final number of infections (long-term) will
 be close to **1092738**.
