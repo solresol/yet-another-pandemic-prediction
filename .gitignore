@@ -1,3 +1,5 @@
 *~
 __pycache__
 .temp-cache
+.ipynb_checkpoints
+logistic-curve.ipynb
