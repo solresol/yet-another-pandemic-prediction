@@ -1,10 +1,10 @@
-# NSW Covid Update for 2022-04-29
+# NSW Covid Update for 2022-04-30
 
 This report is available in several formats:
 
-- [NSW Covid Report 2022-04-29 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-04-29/nsw-covid-report-2022-04-29.pdf)
+- [NSW Covid Report 2022-04-30 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-04-30/nsw-covid-report-2022-04-30.pdf)
 
-- [NSW Covid Report 2022-04-29 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-04-29/nsw-covid-report-2022-04-29.docx)
+- [NSW Covid Report 2022-04-30 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-04-30/nsw-covid-report-2022-04-30.docx)
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
@@ -23,7 +23,7 @@ The death rate peaked on **Friday 28th January 2022**.
 The final number of deaths (long-term) will
 be close to **1929**.
 
-![](2022-04-29/deaths.png)
+![](2022-04-30/deaths.png)
 
 
 
@@ -34,7 +34,7 @@ So it ends up predicting a flat line instead of dropping back down to zero.
 
 The number of people going into hospital peaked on **Friday 31st December 2021**.
 
-![](2022-04-29/hospitalisation.png)
+![](2022-04-30/hospitalisation.png)
 
 ## ICU
 
@@ -44,7 +44,7 @@ So it ends up predicting a flat line instead of dropping back down to zero.
 
 The number of people going into ICU peaked on **Monday 21st March 2022**.
 
-![](2022-04-29/icu.png)
+![](2022-04-30/icu.png)
 
 ## Number of people on ventilators
 
@@ -53,7 +53,7 @@ a short time (either they recover or they die). So it ends up predicting a flat 
 
 The number of people needing ventilators peaked on **Monday 3rd January 2022**.
 
-![](2022-04-29/ventilators.png)
+![](2022-04-30/ventilators.png)
 
 ## Number of confirmed infections
 
@@ -61,16 +61,16 @@ Predictions:
 
 | When | Total Infections | Infections that day |
 | ---- | ------------ | --------------- |
-| Saturday 30th April 2022 | 2098192 | 4198 |
-| Friday 6th May 2022 | 2120478 | 3389 |
-| Friday 13th May 2022 | 2141049 | 2625 |
-| Sunday 29th May 2022 | 2172098 | 1440 |
+| Sunday 1st May 2022 | 2111738 | 4283 |
+| Saturday 7th May 2022 | 2134518 | 3469 |
+| Saturday 14th May 2022 | 2155616 | 2697 |
+| Monday 30th May 2022 | 2187636 | 1491 |
 
 The final number of infections (long-term) will
-be close to **2208526**.
+be close to **2225837**.
 
 
-According to the model, the number of people getting infected each day peaked on **Wednesday 16th February 2022**. This is a smoothed-out version of reality.
+According to the model, the number of people getting infected each day peaked on **Thursday 17th February 2022**. This is a smoothed-out version of reality.
 
 Note that the first chart (showing the population) is a *log* scale chart. Going up by one line in the chart means 10 times as many people have been infected. 
 
@@ -82,7 +82,7 @@ RAT tests and because of the disincentives to testing) and so the
 numbers here are lower than reality.
 
 
-![](2022-04-29/infection.png)
+![](2022-04-30/infection.png)
 
 
 
