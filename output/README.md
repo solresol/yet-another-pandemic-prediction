@@ -14,7 +14,7 @@ Predictions:
 
 | When | Total Deaths | Deaths that Day |
 | ---- | ------------ | --------------- |
-| Tuesday 26th July 2022 | 3875 | 10 |
+| Tuesday 26th July 2022 | 3876 | 10 |
 | Monday 1st August 2022 | 3934 | 9 |
 | Wednesday 24th August 2022 | 4139 | 8 |
 
@@ -32,7 +32,7 @@ be close to **5099**.
 This model isn't smart enough to realise that people get better and leave the hospital.
 So it ends up predicting a flat line instead of dropping back down to zero.
 
-The number of people going into hospital peaked on **Friday 31st December 2021**.
+The number of people going into hospital peaked on **Friday 27th August 2021**.
 
 ![](2022-07-25/hospitalisation.png)
 
@@ -61,16 +61,16 @@ Predictions:
 
 | When | Total Infections | Infections that day |
 | ---- | ------------ | --------------- |
-| Monday 16th May 2022 | 2428990 | 10497 |
-| Sunday 22nd May 2022 | 2490190 | 9988 |
-| Sunday 29th May 2022 | 2557762 | 9403 |
-| Tuesday 14th June 2022 | 2697217 | 8123 |
+| Tuesday 26th July 2022 | 3118665 | 8675 |
+| Monday 1st August 2022 | 3169924 | 8449 |
+| Monday 8th August 2022 | 3228034 | 8191 |
+| Wednesday 24th August 2022 | 3354204 | 7620 |
 
 The final number of infections (long-term) will
-be close to **3411567**.
+be close to **4824770**.
 
 
-According to the model, the number of people getting infected each day peaked on **Tuesday 25th January 2022**. This is a smoothed-out version of reality.
+According to the model, the number of people getting infected each day peaked on **Tuesday 17th August 2021**. This is a smoothed-out version of reality.
 
 Note that the first chart (showing the population) is a *log* scale chart. Going up by one line in the chart means 10 times as many people have been infected. 
 
