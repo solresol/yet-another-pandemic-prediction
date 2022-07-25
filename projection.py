@@ -75,7 +75,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     try:
         omicron_cases_result = scipy.optimize.minimize(
             error_on_logistic_curve, 
-            [100000,1000000,19000, 0.001],
+            [100000,6000000,19150, 0.001],
             (omicron_cases.CASES, time_data.when_tstamp),
             tol=0.1
         )
@@ -94,7 +94,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     fig, ax = matplotlib.pyplot.subplots(figsize=(8,4))
     hospital_result = scipy.optimize.minimize(
         error_on_logistic_curve, 
-        [140,3000,19000, 0.2],
+        [140,3000,19150, 0.2],
         (omicron_hospital.HOSP, time_data.when_tstamp),
         tol=0.1, method='Nelder-Mead'
     )
@@ -115,7 +115,7 @@ with matplotlib.pyplot.style.context('seaborn-darkgrid'):
     try:
         icu_result = scipy.optimize.minimize(
             error_on_logistic_curve, 
-            [25,250,19000, 0.2],
+            [25,250,19150, 0.2],
             (omicron_hospital.ICU, time_data.when_tstamp),
             tol=0.1, method='Nelder-Mead'
         )
