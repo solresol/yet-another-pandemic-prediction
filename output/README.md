@@ -1,10 +1,10 @@
-# NSW Covid Update for 2022-08-24
+# NSW Covid Update for 2022-08-25
 
 This report is available in several formats:
 
-- [NSW Covid Report 2022-08-24 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-08-24/nsw-covid-report-2022-08-24.pdf)
+- [NSW Covid Report 2022-08-25 PDF Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-08-25/nsw-covid-report-2022-08-25.pdf)
 
-- [NSW Covid Report 2022-08-24 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-08-24/nsw-covid-report-2022-08-24.docx)
+- [NSW Covid Report 2022-08-25 Word Format](https://github.com/solresol/yet-another-pandemic-prediction/raw/main/output/2022-08-25/nsw-covid-report-2022-08-25.docx)
 
 - [Online web page](https://github.com/solresol/yet-another-pandemic-prediction/tree/main/output/README.md) (always up-to-date)
 
@@ -14,16 +14,16 @@ Predictions:
 
 | When | Total Deaths | Deaths that Day |
 | ---- | ------------ | --------------- |
-| Thursday 25th August 2022 | 4566 | 15 |
-| Wednesday 31st August 2022 | 4660 | 15 |
-| Friday 23rd September 2022 | 5022 | 15 |
+| Friday 26th August 2022 | 4589 | 15 |
+| Thursday 1st September 2022 | 4684 | 15 |
+| Saturday 24th September 2022 | 5049 | 15 |
 
-The death rate peaked on **Sunday 7th August 2022**.
+The death rate will peak on **Friday 7th October 2022**.
 
 The final number of deaths (long-term) will
-be close to **32505**.
+be close to **32107**.
 
-![](2022-08-24/deaths.png)
+![](2022-08-25/deaths.png)
 
 
 
@@ -32,9 +32,9 @@ be close to **32505**.
 This model isn't smart enough to realise that people get better and leave the hospital.
 So it ends up predicting a flat line instead of dropping back down to zero.
 
-The number of people going into hospital peaked on **Friday 31st December 2021**.
+The number of people going into hospital peaked on **Thursday 30th December 2021**.
 
-![](2022-08-24/hospitalisation.png)
+![](2022-08-25/hospitalisation.png)
 
 ## ICU
 
@@ -44,16 +44,16 @@ So it ends up predicting a flat line instead of dropping back down to zero.
 
 The number of people going into ICU peaked on **Monday 21st March 2022**.
 
-![](2022-08-24/icu.png)
+![](2022-08-25/icu.png)
 
 ## Number of people on ventilators
 
 This model isn't smart enough to realise that people only need ventilators for
 a short time (either they recover or they die). So it ends up predicting a flat line.
 
-The number of people needing ventilators peaked on **Sunday 26th December 2021**.
+The number of people needing ventilators peaked on **Monday 27th December 2021**.
 
-![](2022-08-24/ventilators.png)
+![](2022-08-25/ventilators.png)
 
 ## Number of confirmed infections
 
@@ -61,16 +61,16 @@ Predictions:
 
 | When | Total Infections | Infections that day |
 | ---- | ------------ | --------------- |
-| Thursday 25th August 2022 | 3355137 | 7124 |
-| Wednesday 31st August 2022 | 3397071 | 6893 |
-| Wednesday 7th September 2022 | 3444267 | 6629 |
-| Friday 23rd September 2022 | 3545415 | 6055 |
+| Friday 26th August 2022 | 3351129 | 6737 |
+| Thursday 1st September 2022 | 3390688 | 6490 |
+| Thursday 8th September 2022 | 3434997 | 6210 |
+| Saturday 24th September 2022 | 3529138 | 5602 |
 
 The final number of infections (long-term) will
-be close to **4492922**.
+be close to **4301891**.
 
 
-According to the model, the number of people getting infected each day peaked on **Saturday 30th October 2021**. This is a smoothed-out version of reality.
+According to the model, the number of people getting infected each day peaked on **Saturday 4th December 2021**. This is a smoothed-out version of reality.
 
 Note that the first chart (showing the population) is a *log* scale chart. Going up by one line in the chart means 10 times as many people have been infected. 
 
@@ -82,7 +82,7 @@ RAT tests and because of the disincentives to testing) and so the
 numbers here are lower than reality.
 
 
-![](2022-08-24/infection.png)
+![](2022-08-25/infection.png)
 
 
 
